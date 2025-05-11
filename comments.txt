@@ -1,0 +1,15 @@
+allah
+this is my commrt
+@app.route('/dom')
+def dom():
+    response = make_response(render_template('Dom.html'))  # Render the DOM XSS page
+    # Update the Content Security Policy to allow inline scripts and styles
+    response.headers['Content-Security-Policy'] = (
+        "default-src 'self'; "
+        "script-src 'self' 'unsafe-inline'; "  # Allow inline scripts
+        "style-src 'self' 'unsafe-inline'; "  # Allow inline styles
+    )
+    return response
+<script>alert('XSS')</script>
+<script>alert('XSS')</script>
+<script>alert('XSS')</script>
